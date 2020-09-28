@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Modal, Form, Input, Tag, Upload, message, Button, Icon } from 'antd';
+import { Modal, Form, Input, Tag, Upload, message, Button } from 'antd';
 import hostStore from 'pages/host/store';
 import http from 'libs/http';
 import store from './store';
@@ -78,7 +78,7 @@ class Ext2Form extends React.Component {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('deploy_id', store.record.deploy_id);
-    http.post('/api/deploy/request/upload/', formData)
+    http.post('/api/deploy/request/upload/', formData, {timeout: 120000})
       .then(res => {
         file.path = res;
         this.setState({fileList: [file]})

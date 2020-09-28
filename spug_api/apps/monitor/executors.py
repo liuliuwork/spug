@@ -1,10 +1,10 @@
 # Copyright: (c) OpenSpug Organization. https://github.com/openspug/spug
 # Copyright: (c) <spug.dev@gmail.com>
 # Released under the AGPL-3.0 License.
-from libs.ssh import SSH
 from apps.host.models import Host
-from apps.setting.utils import AppSetting
 from socket import socket
+import subprocess
+import platform
 import requests
 import logging
 
@@ -24,14 +24,30 @@ def port_check(addr, port):
         sock = socket()
         sock.settimeout(5)
         sock.connect((addr, int(port)))
+        sock.close()
         return True, '端口状态检测正常'
     except Exception as e:
         return False, f'异常信息：{e}'
 
 
-def host_executor(host, pkey, command):
+def ping_check(addr):
     try:
-        cli = SSH(host.hostname, host.port, host.username, pkey=pkey)
+        if platform.system().lower() == 'windows':
+            command = f'ping -n 1 -w 3000 {addr}'
+        else:
+            command = f'ping -c 1 -t 3 {addr}'
+        task = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
+        if task.returncode == 0:
+            return True, 'Ping检测正常'
+        else:
+            return False, 'Ping检测失败'
+    except Exception as e:
+        return False, f'异常信息：{e}'
+
+
+def host_executor(host, command):
+    try:
+        cli = host.get_ssh()
         exit_code, out = cli.exec_command(command)
         if exit_code == 0:
             return True, out or '检测状态正常'
@@ -46,12 +62,13 @@ def dispatch(tp, addr, extra):
         return site_check(addr)
     elif tp == '2':
         return port_check(addr, extra)
+    elif tp == '5':
+        return ping_check(addr)
     elif tp == '3':
         command = f'ps -ef|grep -v grep|grep {extra!r}'
     elif tp == '4':
         command = extra
     else:
         raise TypeError(f'invalid monitor type: {tp!r}')
-    pkey = AppSetting.get('private_key')
     host = Host.objects.filter(pk=addr).first()
-    return host_executor(host, pkey, command)
+    return host_executor(host, command)

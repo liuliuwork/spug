@@ -94,10 +94,10 @@ Spug是面向中小型企业设计的轻量级无Agent的自动化运维平台�
   <thead>
     <tr>
       <th align="center" style="width: 115px;">
-        <a href="https://www.ucloud.cn/site/active/1111.html?invitation_code=C1xD0E5678FBA77">
+        <a href="https://www.ucloud.cn/site/active/kuaijie.html?invitation_code=C1xD0E5678FBA77">
           <img src="http://image.qbangmang.com/ucloud.png" width="115px"><br>
           <sub>UCloud</sub><br>
-          <sub>7.3 元/月云主机</sub>
+          <sub>5 元/月云主机</sub>
         </a>
       </th>
         <th align="center" style="width: 115px;">
@@ -105,6 +105,13 @@ Spug是面向中小型企业设计的轻量级无Agent的自动化运维平台�
           <img src="http://image.qbangmang.com/ecs_223.jpg" width="115px"><br>
           <sub>阿里云</sub><br>
           <sub>74元/年云主机</sub>
+        </a>
+      </th>
+      <th align="center" style="width: 125px;">
+        <a href="http://www.magedu.com">
+          <img src="http://image.qbangmang.com/magedu-logo.jpeg" width="115px"><br>
+          <sub>马哥教育</sub><br>
+          <sub>IT人高薪职业学院</sub>
         </a>
       </th>
     </tr>
@@ -117,7 +124,7 @@ Spug是面向中小型企业设计的轻量级无Agent的自动化运维平台�
    <img src="http://image.qbangmang.com/spug.png" width = "300" height = "300" alt="spug-qq" align=center />
 <div>
 
-#### 微信群: 关注Spug公众号拉你进群
+#### 微信：关注Spug运维公众号加微信群、获取最新产品动态
 <div >
    <img src="http://image.qbangmang.com/spug-weixin.jpeg" width = "300" height = "300" alt="spug-qq" align=center />
 <div>
